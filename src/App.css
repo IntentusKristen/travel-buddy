@@ -37,7 +37,16 @@
   }
 }
 
+.map-component {
+  margin-left: auto;
+  margin-right: 0;
+  height: "100vh";
+  width: "70%"; 
+}
+
 .right-align {
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: auto;
   margin-right: 0;
 }
