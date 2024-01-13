@@ -9,9 +9,11 @@
     "leaflet": "^1.9.4",
     "leaflet-react": "^3.0.5",
     "leaflet-routing-machine": "^3.2.12",
+    "axios": "^1.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
+    "react-places-autocomplete": "^7.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
