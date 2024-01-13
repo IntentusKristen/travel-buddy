@@ -1,0 +1,63 @@
+body {
+    background-color: #ebe4d1;
+    margin-left: 20px;
+}
+
+h1 {
+    color: #35523C;
+}
+
+p {
+    font-size: 20px;
+}
+
+.infoDiv{
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+#fname {
+    width: 100px;
+}
+
+.firstName{
+    margin-left: 80px;
+}
+
+#lname{
+    width: 100px;
+}
+
+.lastName{
+    margin-left: 100px;
+}
+
+#pnumber{
+    width: 100px;
+}
+
+.phoneNumber{
+    margin-left: 40px;
+}
+
+#econtact {
+    width: 100px;
+}
+
+.first{
+    margin-left: 27px;
+}
+
+.third{
+    margin-left: 20px;
+}
+
+.fourth{
+    margin-left: 9px;
+}
+
+.button{
+    margin-top: 60px;
+    width: 70px;
+    height: 30px;
+}
