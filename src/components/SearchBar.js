@@ -12,14 +12,20 @@ class SearchBar extends React.Component {
  
   handleChange = address => {
     this.setState({ address });
+
   };
  
   handleSelect = address => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
+      .then(latLng => {
+        console.log('Success', latLng);
+        
+      })
       .catch(error => console.error('Error', error));
     this.handleChange(address);
+    this.props.onAddressChange(address);
+    
   };
  
   render() {
@@ -42,7 +48,7 @@ class SearchBar extends React.Component {
             {/* Searchbox */}
             <input
               {...getInputProps({
-                placeholder: 'Search TravelBuddy! 🔎',
+                placeholder: this.props.placeholder,
                 className: 'location-search-input',
                 style: {
                   padding: '0.4rem 1.3rem',
@@ -50,6 +56,7 @@ class SearchBar extends React.Component {
                   borderRadius: '1rem',
                   fontSize: '1rem',
                   color: '#000000',
+                  marginTop: 20
                 }
               })}
             />
