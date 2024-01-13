@@ -1,0 +1,24 @@
+.popover {
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    z-index: 9999;
+    height: 500px;
+    width: 500px;
+    background-color: #d1ebd1;
+    border: black solid 1px;
+    border-radius: 25px;
+    color: black;
+}
+
+.close-btn {
+    color: black;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.close-btn:hover {
+    cursor: pointer;
+}

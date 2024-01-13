@@ -1,0 +1,74 @@
+.weather-widget-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f2f2;
+    width: 400px;
+    height: 200px;
+    color: black;
+    border-radius: 25px;
+}
+
+.weather {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1rem 1rem;
+}
+
+.temp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: xx-large;
+    border-right: 1px solid black;
+}
+
+.current-date {
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0.5rem;
+}
+
+.current-city {
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.weather-details-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.weather-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0.5rem 2rem;
+}
+
+.weather-detail {
+    font-size: small;
+    width: fit-content;
+    margin: 0.2rem;
+}
+
+.gpt-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    background-color: #f3f2f2;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.gpt-btn:hover {
+    background-color: #e6e6e6;
+}
