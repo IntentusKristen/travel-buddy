@@ -30,8 +30,6 @@ export const MapComponent = ({ start, end }) => {
   useEffect(() => {
     if (!mapRef.current || !startLatLong || !endLatLong) return;
 
-    console.log(mapRef.current);
-
     if (routingMachineRef.current) {
       // if the routing-machine instance already exists, just update the waypoints
       routingMachineRef.current.setWaypoints([
@@ -61,12 +59,16 @@ export const MapComponent = ({ start, end }) => {
     // add the routing machine to the map
     routingMachine.addTo(mapRef.current);
 
-    // get the layers used by the routing machine
-  const layers = routingMachine.getPlan().getWaypoints(); // or other layers as needed
+   // listen for the routesfound event
+   routingMachine.on('routesfound', (event) => {
+    // get the route instructions
+    const instructions = event.routes[0].instructions;
+    //console.log(event.routes[0])
 
-  // print each layer to the console
-  layers.forEach(layer => {
-    console.log(layer);
+    // log each instruction to the console
+    instructions.forEach(instruction => {
+      console.log(instruction.road); // this contains the road or street names
+    });
   });
   }, [mapRef.current, startLatLong, endLatLong]);
 
