@@ -27,8 +27,6 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
         onHandleStartLatLong(latLng);
       })
       .catch(error => console.error('Error', error));
-    
-    console.log(newAddress);
   };
 
   const handleEndAddress = newAddress => {
@@ -39,7 +37,6 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
         onHandleEndLatLong(latLng);
       })
       .catch(error => console.error('Error', error));
-    console.log(newAddress);
   };
 
   return (
