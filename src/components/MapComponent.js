@@ -18,7 +18,6 @@ export const MapComponent = () => {
       center={position}
       zoom={100}
       scrollWheelZoom={false}
-      style={{ height: "100vh", width: "70%", padding: 0 }}
       className="right-align"
     >
       <TileLayer
