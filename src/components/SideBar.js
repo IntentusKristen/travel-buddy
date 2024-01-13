@@ -1,17 +1,33 @@
 import React, { useState } from 'react'
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-export const SideBar = () => {
+export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
   const [startAddress, setStartAddress] = useState('');
   const [endAddress, setEndAddress] = useState('');
+  const [startLatLong, setStartLatLong] = useState('');
+  const [endLatLong, setEndLatLong] = useState('');
 
   const handleStartAddress = newAddress => {
     setStartAddress(newAddress);
+    geocodeByAddress(newAddress)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        onHandleStartLatLong(latLng);
+      })
+      .catch(error => console.error('Error', error));
+    
     console.log(newAddress);
   };
 
   const handleEndAddress = newAddress => {
     setEndAddress(newAddress);
+    geocodeByAddress(newAddress)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        onHandleEndLatLong(latLng);
+      })
+      .catch(error => console.error('Error', error));
     console.log(newAddress);
   };
 
