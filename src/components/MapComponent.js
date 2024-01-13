@@ -33,13 +33,8 @@ export const MapComponent = ({ start, end }) => {
     console.log(mapRef.current);
 
     const waypoints = [
-      {latLng: L.latLng(startLatLong.lat, startLatLong.lng),
-        createMarker: () => null,
-        iconSize: 0
-      },
-      {latLng: L.latLng(endLatLong.lat, endLatLong.lng),
-        
-      },
+      L.latLng(startLatLong.lat, startLatLong.lng),
+      L.latLng(endLatLong.lat, endLatLong.lng),
     ];
 
     const routingMachine = L.Routing.control({
