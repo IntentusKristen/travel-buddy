@@ -3,74 +3,85 @@ import { MapContainer, TileLayer, Marker, Popup, ZoomControl, FeatureGroup, useM
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import L, { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useState } from "react";
 
-
-export const MapComponent = ({start, end}) => {
+export const MapComponent = ({ start, end }) => {
   const [startLatLong, setStartLatLong] = useState('');
   const [endLatLong, setEndLatLong] = useState('');
   const position = [43.00073, -81.31361];
-  const [map, setMap] = useState(null);
-  const groupRef = useRef();
   const mapRef = useRef();
+  const groupRef = useRef();
+  const routingMachineRef = useRef();
 
-  // stop useEffect from running on first render
-  const hasMounted = useRef(false);
-
+  // update marker position when start or end changes
   useEffect(() => {
-    if (!hasMounted.current) {
-      hasMounted.current = true;
-      return;
-    }
-
-    // update lat and long values
     if (start) {
-      setStartLatLong([start.lat, start.lng]);
-  
+      setStartLatLong({ lat: start.lat, lng: start.lng });
     }
 
-    // update lat and long values
     if (end) {
-      setEndLatLong([end.lat, end.lng]);
-  
+      setEndLatLong({ lat: end.lat, lng: end.lng });
     }
+  }, [start, end]);
 
-    
-  }, [start, end])
+  // create the routing-machine instance
+  useEffect(() => {
+    if (!mapRef.current || !startLatLong || !endLatLong) return;
 
+    console.log(mapRef.current);
+
+    const waypoints = [
+      {latLng: L.latLng(startLatLong.lat, startLatLong.lng),
+        createMarker: () => null,
+        iconSize: 0
+      },
+      {latLng: L.latLng(endLatLong.lat, endLatLong.lng),
+        
+      },
+    ];
+
+    const routingMachine = L.Routing.control({
+      position: 'topright',
+      lineOptions: {
+        styles: [{ color: '#757de8' }],
+      },
+      waypoints: waypoints,
+      createMarker: () => null
+    });
+
+    // save the routing-machine instance to the ref
+    routingMachineRef.current = routingMachine;
+
+    // Add the routing machine to the map
+    routingMachine.addTo(mapRef.current);
+  }, [mapRef.current, startLatLong, endLatLong]);
 
   return (
     <MapContainer
-      center={(startLatLong && endLatLong) ? [(startLatLong.lat + startLatLong.lng)/2, (endLatLong.lat + endLatLong.lng)/2] : position}
-      zoom={100}
+      center={(startLatLong && endLatLong) ? [(startLatLong.lat + endLatLong.lat) / 2, (startLatLong.lng + endLatLong.lng) / 2] : position}
+      zoom={13}
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%", padding: 0, zIndex: 0 }}
       className="right-align"
       ref={mapRef}
     >
-      
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <FeatureGroup ref={groupRef}>
+      
         {startLatLong && <Marker
-          position={[startLatLong[0], startLatLong[1]]}
+          position={[startLatLong.lat, startLatLong.lng]}
           icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 40] })}
-        >
-
-        </Marker>}
+        />}
         {endLatLong && <Marker
-          position={[endLatLong[0], endLatLong[1]]}
+          position={[endLatLong.lat, endLatLong.lng]}
           icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 40] })}
-        >
-      
-        </Marker>}
-      </FeatureGroup>
+        />}
+   
       <ZoomControl position="topright" />
-      
-      
-      
     </MapContainer>
   );
 };
