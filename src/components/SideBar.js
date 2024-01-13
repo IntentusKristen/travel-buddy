@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchBar from './SearchBar'
 
 export const SideBar = () => {
   return (
@@ -11,7 +12,10 @@ export const SideBar = () => {
       position: "absolute",
       zIndex: 1,
       }}>
-          <p>Sidebar</p>
+        <div style={{paddingTop:"30px", marginRight: 10}}>
+        <SearchBar/>
+        </div>
+          
         
       </div>
   )
