@@ -9,8 +9,6 @@ import { SearchBar } from '../components/SearchBar';
 function App() {
   return (
     <div className="App" id='root'>
-      <header className="App-header">
-      </header>
       <MapComponent/>
     </div>
   );

@@ -3,7 +3,6 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
-
 export const MapComponent = () => {
   const position = [43.00073, -81.31361];
   // hardcode latitude values for now
@@ -12,21 +11,14 @@ export const MapComponent = () => {
   const endLat = 43.00073;
   const endLong = -81.31361;
   const initialZoom = 2;
-
   return (
-   
     <MapContainer
       center={position}
       zoom={100}
       scrollWheelZoom={false}
-      style={{height: "100vh",
-      width: "70%",
-      padding: 0,
-      marginLeft: "auto",
-      marginRight: 0,
-      }}
+      style={{ height: "100vh", width: "70%", padding: 0 }}
+      className="right-align"
     >
-      
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -38,6 +30,5 @@ export const MapComponent = () => {
         <Popup>You are here.</Popup>
       </Marker>
     </MapContainer>
-
   );
 };
