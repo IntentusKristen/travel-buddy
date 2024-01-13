@@ -18,7 +18,7 @@ export const MapComponent = () => {
       center={position}
       zoom={100}
       scrollWheelZoom={false}
-      className="right-align"
+      className="map-component"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
