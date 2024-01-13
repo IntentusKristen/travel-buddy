@@ -1,36 +1,82 @@
 import React, { useRef, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, FeatureGroup, useMap } from "react-leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
-import { Icon } from "leaflet";
+import L, { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import { useState } from "react";
 
-export const MapComponent = () => {
+export const MapComponent = ({ start, end }) => {
+  const [startLatLong, setStartLatLong] = useState('');
+  const [endLatLong, setEndLatLong] = useState('');
   const position = [43.00073, -81.31361];
-  // hardcode latitude values for now
-  const startLat = 43.0096;
-  const startLong = 81.2737;
-  const endLat = 43.00073;
-  const endLong = -81.31361;
-  const initialZoom = 2;
+  const mapRef = useRef();
+  const groupRef = useRef();
+  const routingMachineRef = useRef();
+
+  // update marker position when start or end changes
+  useEffect(() => {
+    if (start) {
+      setStartLatLong({ lat: start.lat, lng: start.lng });
+    }
+
+    if (end) {
+      setEndLatLong({ lat: end.lat, lng: end.lng });
+    }
+  }, [start, end]);
+
+  // create the routing-machine instance
+  useEffect(() => {
+    if (!mapRef.current || !startLatLong || !endLatLong) return;
+
+    console.log(mapRef.current);
+
+    const waypoints = [
+      L.latLng(startLatLong.lat, startLatLong.lng),
+      L.latLng(endLatLong.lat, endLatLong.lng),
+    ];
+
+    const routingMachine = L.Routing.control({
+      position: 'topright',
+      lineOptions: {
+        styles: [{ color: '#757de8' }],
+      },
+      waypoints: waypoints,
+      createMarker: () => null
+    });
+
+    // save the routing-machine instance to the ref
+    routingMachineRef.current = routingMachine;
+
+    // Add the routing machine to the map
+    routingMachine.addTo(mapRef.current);
+  }, [mapRef.current, startLatLong, endLatLong]);
 
   return (
     <MapContainer
-      center={position}
-      zoom={100}
-      scrollWheelZoom={false}
-      style={{ height: "100vh", width: "70%", padding: 0 }}
+      center={(startLatLong && endLatLong) ? [(startLatLong.lat + endLatLong.lat) / 2, (startLatLong.lng + endLatLong.lng) / 2] : position}
+      zoom={13}
+      scrollWheelZoom={true}
+      style={{ height: "100vh", width: "100%", padding: 0, zIndex: 0 }}
       className="right-align"
+      ref={mapRef}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker
-        position={position}
-        icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 40] })}
-      >
-        <Popup>You are here.</Popup>
-      </Marker>
+      
+        {startLatLong && <Marker
+          position={[startLatLong.lat, startLatLong.lng]}
+          icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 40] })}
+        />}
+        {endLatLong && <Marker
+          position={[endLatLong.lat, endLatLong.lng]}
+          icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 40] })}
+        />}
+   
+      <ZoomControl position="topright" />
     </MapContainer>
   );
 };

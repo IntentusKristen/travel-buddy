@@ -1,33 +1,28 @@
 import '../App.css';
 import { MapComponent } from '../components/MapComponent';
-import { WeatherWidget } from '../components/WeatherWidget';
+import { SideBar } from '../components/SideBar';
 import React, { useState } from "react";
 
 function App() {
-  const [weather, setWeather] = useState({});
-  
-  fetch('http://localhost:5001/api/weather')
-  .then(res => res.json())
-  .then(data => {
-    setWeather(data.data);
-  })
-  .catch(error => {
-      console.error('Error fetching weather data:', error);
-  });
+  // use states for start and end lat and long
+  const [startLatLong, setStartLatLong] = useState('');
+  const [endLatLong, setEndLatLong] = useState('');
+
+
+  const handleStartLatLong = newLatLong => {
+    setStartLatLong(newLatLong);
+    console.log("new LATLONG1" + newLatLong.lat);
+  };
+
+  const handleEndLatLong = newLatLong => {
+    setEndLatLong(newLatLong);
+    console.log("new LATLONG2" +newLatLong);
+  };
 
   return (
-    <div className="App" id='root'>
-      <header className="App-header">
-        { weather && (
-          <WeatherWidget 
-            lat={42.9849}
-            lng={-81.2453}
-            city={'London, Ontario'}
-            weather={weather}
-          />
-        )}
-        <MapComponent/>
-      </header>
+    <div className="App">
+      <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} />
+      <MapComponent start={startLatLong} end={endLatLong}/>
     </div>
   );
 }
