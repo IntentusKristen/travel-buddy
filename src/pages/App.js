@@ -10,9 +10,8 @@ function App() {
   return (
     <div className="App" id='root'>
       <header className="App-header">
-    
-        <MapComponent/>
       </header>
+      <MapComponent/>
     </div>
   );
 }

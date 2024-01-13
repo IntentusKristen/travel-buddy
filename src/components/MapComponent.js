@@ -14,12 +14,19 @@ export const MapComponent = () => {
   const initialZoom = 2;
 
   return (
+   
     <MapContainer
       center={position}
       zoom={100}
       scrollWheelZoom={false}
-      className="map-component"
+      style={{height: "100vh",
+      width: "70%",
+      padding: 0,
+      marginLeft: "auto",
+      marginRight: 0,
+      }}
     >
+      
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -31,5 +38,6 @@ export const MapComponent = () => {
         <Popup>You are here.</Popup>
       </Marker>
     </MapContainer>
+
   );
 };
