@@ -32,6 +32,15 @@ export const MapComponent = ({ start, end }) => {
 
     console.log(mapRef.current);
 
+    if (routingMachineRef.current) {
+      // if the routing-machine instance already exists, just update the waypoints
+      routingMachineRef.current.setWaypoints([
+        L.latLng(startLatLong.lat, startLatLong.lng),
+        L.latLng(endLatLong.lat, endLatLong.lng),
+      ]);
+      return;
+    }
+
     const waypoints = [
       L.latLng(startLatLong.lat, startLatLong.lng),
       L.latLng(endLatLong.lat, endLatLong.lng),
@@ -49,8 +58,16 @@ export const MapComponent = ({ start, end }) => {
     // save the routing-machine instance to the ref
     routingMachineRef.current = routingMachine;
 
-    // Add the routing machine to the map
+    // add the routing machine to the map
     routingMachine.addTo(mapRef.current);
+
+    // get the layers used by the routing machine
+  const layers = routingMachine.getPlan().getWaypoints(); // or other layers as needed
+
+  // print each layer to the console
+  layers.forEach(layer => {
+    console.log(layer);
+  });
   }, [mapRef.current, startLatLong, endLatLong]);
 
   return (
