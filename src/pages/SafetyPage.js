@@ -1,12 +1,26 @@
 import React from 'react'
 import '../SafetyPage.css';
+import { Link } from "react-router-dom";
 
 const SafetyPage = () => {
   return (
     <div className="safetyPageContainer">
-      <h1>General Safety Tips and Tricks</h1>
-      <p>Here are some things to keep in mind before you travel and stay safe!</p>
-      <h2>Regular Outing Tips</h2>
+      <h1>TravelBuddy</h1>
+      <p>Hello there! This is TravelBuddy, an application that makes navigating the real world safer!</p> 
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/app">Map</Link>
+          </li>
+          <li>
+            <Link to="/userInfo">Profile</Link>
+          </li>
+        </ul>
+      </nav>
+      <h2>Safety Tips for Regular Outings</h2>
         <ol>
           <li>Plan your route
             <ul>
@@ -46,7 +60,7 @@ const SafetyPage = () => {
             </ul>
           </li>
         </ol>
-      <h2>Travel Tips and Tricks</h2>
+      <h2>Safety Tips for Traveling</h2>
         <ol>
           <li>Research Your Destination
             <ul>
