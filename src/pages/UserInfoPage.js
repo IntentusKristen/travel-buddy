@@ -36,11 +36,13 @@ const UserInfoPage = () => {
       marginTop: "3rem",
     }}> 
       <h1> Personal Information</h1>
-      <p> This information will be stored and used for the webapp </p>
+      <p style={{textAlign: 'left'}}> This information will be stored and used for the webapp </p>
       </div>
 
-      <div class = "infoDiv">
-      <form>
+      <div class = "infoDiv" >
+        <div>
+       
+      <form >
         <label for = "fname" class = "firstName"> First name </label>
         <input className="personal-info-input" type = "text" name = "fname" id = "fname" value = {firstName} onChange={ (e) => setFirstName(e.target.value)}/> <br></br>
 
@@ -51,7 +53,7 @@ const UserInfoPage = () => {
         <input className="personal-info-input" type = "tel" name = "pnumber" id = "pnumber" value = {phoneNumber} onChange={ (e) => setPhoneNumber(e.target.value)}/><br></br>
         Emergency contact <input type = "tel" className="personal-info-input"  name = "econtact" id = "econtact" value = {emergencyContact} onChange={ (e) => setEmergencyContact(e.target.value)}/>
 
-        <p> Rank your transportation preference </p>
+        <p style={{textAlign: 'left'}}> Rank your transportation preference </p>
 
         <label for="transportation-methods" class = "first"> First </label> 
         <select name="transportation-methods" id="transportation-methods" value = {transportationOne} onChange={ (e) => setTransportationOne(e.target.value)}> 
@@ -95,10 +97,8 @@ const UserInfoPage = () => {
   
         <button type="button" class = "button" onClick={handleSubmit} className="gpt-btn">Confirm</button>
       </form>
-        
       </div>
-
-      <div id="displayArea">
+      {isSubmitted && (<div id="displayArea" style={{position: 'absolute', top: '60%', right: '5%'}}>
         {isSubmitted && firstName && lastName && <p> Hi, {firstName} {lastName} </p>}
 
         {isSubmitted && phoneNumber && emergencyContact && <p> Welcome to travel buddy! We will store your phone number {phoneNumber} to send text updates and keep the number {emergencyContact} for emergency contact purposes only</p>}
@@ -106,7 +106,10 @@ const UserInfoPage = () => {
         {isSubmitted && transportationOne && transportationTwo && transportationThree && transportationFour && <p> You have selected your transportation priority in the following order: {transportationOne}, {transportationTwo}, {transportationThree} and {transportationFour}</p>}
 
       </div>
-
+      )}
+      </div>
+      
+      
     </div>
   )
 
