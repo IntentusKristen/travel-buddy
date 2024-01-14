@@ -66,15 +66,23 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
         <SearchBar onAddressChange={handleStartAddress} placeholder={"Search Starting Point 🔎"}/>
         <SearchBar onAddressChange={handleEndAddress} placeholder={"Search Destination 🔎"}/>
         </div>
-         {/* Showing address selected */}
-          {tags.map(tag => (
+         {/* Showing address selected */}  
+          {tags &&(tags.map(tag => (
             <div key={tag.name} style={{ marginBottom: '15px', marginTop: '15px' }}>
               <h4 style={{ marginBottom: '0px', marginTop: '2px' }}>{tag.name}: </h4>
               <p style={{ marginBottom: '0px', marginTop: '2px' }}>Type of road: {tag.highway? tag.highway: "Unavailable"}</p>
               <p style={{ marginBottom: '0px', marginTop: '2px' }}>Lanes: {tag.lanes? tag.lanes: "Unavailable"}</p>
               <p style={{ marginBottom: '0px', marginTop: '2px' }}>Max Speed: {tag.maxspeed? tag.maxspeed: "Unavailable"}</p>
             </div>
-          ))}
+          )))}
+          {/* Weather widget */}
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop:"2rem"
+            }}>
+            {weather && <WeatherWidget address={endAddress} weather={weather}/>}
+          </div>
         </div>
   
   
