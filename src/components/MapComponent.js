@@ -7,13 +7,14 @@ import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useState } from "react";
 
-export const MapComponent = ({ start, end }) => {
+export const MapComponent = ({ start, end, onHandleTags }) => {
   const [startLatLong, setStartLatLong] = useState('');
   const [endLatLong, setEndLatLong] = useState('');
   const position = [43.00073, -81.31361];
   const mapRef = useRef();
-  const groupRef = useRef();
   const routingMachineRef = useRef();
+  const [roads, setRoads] = useState([]);
+  const [tags, setTags] = useState([]);
 
   // update marker position when start or end changes
   useEffect(() => {
@@ -30,7 +31,14 @@ export const MapComponent = ({ start, end }) => {
   useEffect(() => {
     if (!mapRef.current || !startLatLong || !endLatLong) return;
 
-    console.log(mapRef.current);
+    if (routingMachineRef.current) {
+      // if the routing-machine instance already exists, just update the waypoints
+      routingMachineRef.current.setWaypoints([
+        L.latLng(startLatLong.lat, startLatLong.lng),
+        L.latLng(endLatLong.lat, endLatLong.lng),
+      ]);
+      return;
+    }
 
     const waypoints = [
       L.latLng(startLatLong.lat, startLatLong.lng),
@@ -49,16 +57,80 @@ export const MapComponent = ({ start, end }) => {
     // save the routing-machine instance to the ref
     routingMachineRef.current = routingMachine;
 
-    // Add the routing machine to the map
+    // add the routing machine to the map
     routingMachine.addTo(mapRef.current);
+
+   // listen for the routesfound event
+   routingMachine.on('routeselected', (event) => {
+    setRoads([]);
+    onHandleTags([]);
+    // get the route instructions
+    const instructions = event.route.instructions;
+    console.log(event.route);
+
+    // log each instruction to the console
+    instructions.forEach(instruction => {
+      setRoads(roads => [...roads, instruction.road]);
+      //console.log(instruction);
+
+      // overpass API query
+      const overpassEndpoint = 'https://overpass-api.de/api/interpreter';
+      const query = `
+      [out:json];
+      area["name"="Canada"]->.searchArea;
+      way["name"="${instruction.road}"](area.searchArea);
+      out center;
+      `;
+
+      fetch(overpassEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `data=${encodeURIComponent(query)}`,
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (!data.elements.length) {
+            console.log('No elements found');
+            return;
+          }
+          // save the tags to the state
+          //console.log(data.elements[0].tags);
+          onHandleTags(tags => {
+            const newTag = data.elements[0].tags;
+          
+            // convert tags array to a set for efficient lookup
+            const tagsSet = new Set(tags.map(tag => JSON.stringify(tag)));
+          
+            // add tag if not duplicate
+            if (!tagsSet.has(JSON.stringify(newTag))) {
+              return [...tags, newTag];
+            }
+          
+            return tags;
+          });
+          
+        })
+        .catch(error => {
+          console.error('Error fetching data from Overpass API:', error);
+        });
+      
+    });
+    
+
+  });
   }, [mapRef.current, startLatLong, endLatLong]);
+
+  
+
 
   return (
     <MapContainer
       center={(startLatLong && endLatLong) ? [(startLatLong.lat + endLatLong.lat) / 2, (startLatLong.lng + endLatLong.lng) / 2] : position}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: "100vh", width: "100%", padding: 0, zIndex: 0 }}
+      style={{ height: "1500px", width: "100%", padding: 0, zIndex: 0 }}
       className="right-align"
       ref={mapRef}
     >
