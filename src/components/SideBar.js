@@ -26,6 +26,7 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
       .catch(error => console.error('Error', error));
   };
 
+
   return (
     <div style={{backgroundColor: "#ebe4d1",
       top: 0,
@@ -44,8 +45,14 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
          {/* Showing address selected */}
         <div style={{paddingTop: 30, marginLeft: 30, marginRight: 30}}>
           <h4>Routing you from: <br></br>{startAddress} {endAddress}</h4>
-          {tags.map(t => t.name)}
-          
+          {tags.map(tag => (
+      <div key={tag.name}>
+        <h4>{tag.name}</h4>
+        <p>Type of road: {tag.highway}</p>
+        <p>Lanes: {tag.lanes}</p>
+        <p>Max Speed: {tag.maxspeed? tag.maxspeed: "Unavailable"}</p>
+      </div>
+    ))}
         </div>
   
       </div>
