@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from './SearchBar';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { WeatherWidget } from '../components/WeatherWidget';
+const axios = require('axios');
+const { parse } = require('node-html-parser');
 
 export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
   const [startAddress, setStartAddress] = useState('');
