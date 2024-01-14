@@ -56,7 +56,7 @@ class SearchBar extends React.Component {
                   borderRadius: '1rem',
                   fontSize: '1rem',
                   color: '#000000',
-                  marginTop: 20
+                  marginTop: 10
                 }
               })}
             />
