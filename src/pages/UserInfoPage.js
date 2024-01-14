@@ -23,6 +23,10 @@ const UserInfoPage = () => {
   
   return (
     <div class = "bigDiv">
+
+    <div>
+      <button onClick={goToHomePage}>Go to Home</button>
+    </div>
       <div class = "topDiv"> 
       <h1> Personal Information</h1>
       <p> This information will be stored and used for the webapp </p>
