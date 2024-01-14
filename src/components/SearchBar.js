@@ -52,7 +52,7 @@ class SearchBar extends React.Component {
                 className: 'location-search-input',
                 style: {
                   padding: '0.4rem 1.3rem',
-                  width: '22vw',
+                  width: '300px',
                   borderRadius: '1rem',
                   fontSize: '1rem',
                   color: '#000000',

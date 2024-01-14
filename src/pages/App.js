@@ -1,9 +1,7 @@
 import '../App.css';
 import { MapComponent } from '../components/MapComponent';
-import { SearchBar } from '../components/SearchBar';
 import { SideBar } from '../components/SideBar';
-import { useState } from 'react';
-
+import React, { useState } from "react";
 
 function App() {
   // use states for start and end lat and long
@@ -25,7 +23,6 @@ function App() {
     setEndLatLong(newLatLong);
     console.log("new LATLONG2" +newLatLong);
   };
-
 
   return (
     <div className="App">
