@@ -33,7 +33,6 @@ function App() {
   return (
     <div className="App">
 
-      <button onClick={goToHomePage}>Go to Home</button>
       <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} />
       <MapComponent start={startLatLong} end={endLatLong}/>
       <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} tags={tags}/>
