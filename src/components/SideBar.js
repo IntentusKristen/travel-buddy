@@ -8,7 +8,7 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
   const [endAddress, setEndAddress] = useState('');
   const [startLatLong, setStartLatLong] = useState('');
   const [endLatLong, setEndLatLong] = useState('');
-  const [weather, setWeather] = useState();
+  const [weather, setWeather] = useState({});
 
     // Update weather only if end latitude changes
     useEffect(() => {
