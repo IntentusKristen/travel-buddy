@@ -12,14 +12,14 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
 
     // Update weather only if end latitude changes
     useEffect(() => {
-      fetch('http://localhost:5001/api/weather')
-      .then(res => res.json())
-      .then(data => {
-        setWeather(data.data);
-      })
-      .catch(error => {
-          console.error('Error fetching weather data:', error);
-      });
+      // fetch('http://localhost:5001/api/weather')
+      // .then(res => res.json())
+      // .then(data => {
+      //   setWeather(data.data);
+      // })
+      // .catch(error => {
+      //     console.error('Error fetching weather data:', error);
+      // });
     }, []);
 
   const handleStartAddress = newAddress => {

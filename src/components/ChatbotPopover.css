@@ -45,9 +45,10 @@
 }
 
 .chat-bubble {
-    text-align: left;
-    font-size: medium;
-    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-start;
+    font-size: small;
+    padding: 0 1.5rem;
     border-radius: 25px;
     border: black solid 1px;
     margin-bottom: 1rem;
@@ -60,7 +61,7 @@
 }
 
 .input {
-    background-color: #468046;
+    background-color: #eaf0ea;
     align-self: flex-end;
 }
 
