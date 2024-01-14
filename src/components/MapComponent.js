@@ -12,8 +12,8 @@ export const MapComponent = ({ start, end }) => {
   const [endLatLong, setEndLatLong] = useState('');
   const position = [43.00073, -81.31361];
   const mapRef = useRef();
-  const groupRef = useRef();
   const routingMachineRef = useRef();
+  const [roads, setRoads] = useState([]);
 
   // update marker position when start or end changes
   useEffect(() => {
@@ -60,17 +60,48 @@ export const MapComponent = ({ start, end }) => {
     routingMachine.addTo(mapRef.current);
 
    // listen for the routesfound event
-   routingMachine.on('routesfound', (event) => {
+   routingMachine.on('routeselected', (event) => {
     // get the route instructions
-    const instructions = event.routes[0].instructions;
-    //console.log(event.routes[0])
+    const instructions = event.route.instructions;
+    console.log(event.route)
 
     // log each instruction to the console
     instructions.forEach(instruction => {
-      console.log(instruction.road); // this contains the road or street names
+      setRoads(roads => [...roads, instruction.road]);
+      //console.log(instruction);
+
+      // overpass API query
+      const overpassEndpoint = 'https://overpass-api.de/api/interpreter';
+      const query = `
+      [out:json];
+      area["name"="Canada"]->.searchArea;
+      way["name"="${instruction.road}"](area.searchArea);
+      out center;
+      `;
+
+      fetch(overpassEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `data=${encodeURIComponent(query)}`,
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Process the Overpass API response (data)
+          console.log(data.elements[0].tags);
+        })
+        .catch(error => {
+          console.error('Error fetching data from Overpass API:', error);
+        });
+      
     });
+
   });
   }, [mapRef.current, startLatLong, endLatLong]);
+
+  
+
 
   return (
     <MapContainer
