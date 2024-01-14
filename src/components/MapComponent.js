@@ -62,7 +62,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
 
    // listen for the routesfound event
    routingMachine.on('routeselected', (event) => {
-    setRoads([]);
+   
     onHandleTags([]);
     // get the route instructions
     const instructions = event.route.instructions;
@@ -70,7 +70,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
 
     // log each instruction to the console
     instructions.forEach(instruction => {
-      setRoads(roads => [...roads, instruction.road]);
+   
      
 
       // overpass API query
