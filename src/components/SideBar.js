@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import SearchBar from './SearchBar';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
+export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
   const [startAddress, setStartAddress] = useState('');
   const [endAddress, setEndAddress] = useState('');
-  const [startLatLong, setStartLatLong] = useState('');
-  const [endLatLong, setEndLatLong] = useState('');
 
   const handleStartAddress = newAddress => {
     setStartAddress(newAddress);
@@ -46,6 +44,8 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
          {/* Showing address selected */}
         <div style={{paddingTop: 30, marginLeft: 30, marginRight: 30}}>
           <h4>Routing you from: <br></br>{startAddress} {endAddress}</h4>
+          {tags.map(t => t.name)}
+          
         </div>
   
       </div>

@@ -7,13 +7,14 @@ import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useState } from "react";
 
-export const MapComponent = ({ start, end }) => {
+export const MapComponent = ({ start, end, onHandleTags }) => {
   const [startLatLong, setStartLatLong] = useState('');
   const [endLatLong, setEndLatLong] = useState('');
   const position = [43.00073, -81.31361];
   const mapRef = useRef();
   const routingMachineRef = useRef();
   const [roads, setRoads] = useState([]);
+  const [tags, setTags] = useState([]);
 
   // update marker position when start or end changes
   useEffect(() => {
@@ -63,7 +64,7 @@ export const MapComponent = ({ start, end }) => {
    routingMachine.on('routeselected', (event) => {
     // get the route instructions
     const instructions = event.route.instructions;
-    console.log(event.route)
+    console.log(event.route);
 
     // log each instruction to the console
     instructions.forEach(instruction => {
@@ -88,14 +89,29 @@ export const MapComponent = ({ start, end }) => {
       })
         .then(response => response.json())
         .then(data => {
-          // Process the Overpass API response (data)
-          console.log(data.elements[0].tags);
+          // save the tags to the state
+          //console.log(data.elements[0].tags);
+          onHandleTags(tags => {
+            const newTag = data.elements[0].tags;
+          
+            // convert tags array to a set for efficient lookup
+            const tagsSet = new Set(tags.map(tag => JSON.stringify(tag)));
+          
+            // add tag if not duplicate
+            if (!tagsSet.has(JSON.stringify(newTag))) {
+              return [...tags, newTag];
+            }
+          
+            return tags;
+          });
+          
         })
         .catch(error => {
           console.error('Error fetching data from Overpass API:', error);
         });
       
     });
+    
 
   });
   }, [mapRef.current, startLatLong, endLatLong]);
