@@ -31,7 +31,7 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
     <div style={{backgroundColor: "#ebe4d1",
       top: 0,
       left: 0,
-      height: "100vh",
+      height: "1500px",
       width: "30%",
       borderRadius: "0% 5% 5% 0%",
       position: "absolute",

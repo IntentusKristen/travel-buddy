@@ -62,6 +62,8 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
 
    // listen for the routesfound event
    routingMachine.on('routeselected', (event) => {
+    setRoads([]);
+    onHandleTags([]);
     // get the route instructions
     const instructions = event.route.instructions;
     console.log(event.route);
@@ -89,6 +91,10 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
       })
         .then(response => response.json())
         .then(data => {
+          if (!data.elements.length) {
+            console.log('No elements found');
+            return;
+          }
           // save the tags to the state
           //console.log(data.elements[0].tags);
           onHandleTags(tags => {
@@ -124,7 +130,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
       center={(startLatLong && endLatLong) ? [(startLatLong.lat + endLatLong.lat) / 2, (startLatLong.lng + endLatLong.lng) / 2] : position}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: "100vh", width: "100%", padding: 0, zIndex: 0 }}
+      style={{ height: "1500px", width: "100%", padding: 0, zIndex: 0 }}
       className="right-align"
       ref={mapRef}
     >
