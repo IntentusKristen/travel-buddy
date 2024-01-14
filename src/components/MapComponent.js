@@ -71,7 +71,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
     // log each instruction to the console
     instructions.forEach(instruction => {
       setRoads(roads => [...roads, instruction.road]);
-      //console.log(instruction);
+     
 
       // overpass API query
       const overpassEndpoint = 'https://overpass-api.de/api/interpreter';
