@@ -8,7 +8,6 @@ function App() {
   const [startLatLong, setStartLatLong] = useState('');
   const [endLatLong, setEndLatLong] = useState('');
 
-
   const handleStartLatLong = newLatLong => {
     setStartLatLong(newLatLong);
     console.log("new LATLONG1" + newLatLong.lat);
@@ -21,7 +20,10 @@ function App() {
 
   return (
     <div className="App">
-      <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} />
+      <SideBar 
+        onHandleStartLatLong={handleStartLatLong} 
+        onHandleEndLatLong={handleEndLatLong} 
+      />
       <MapComponent start={startLatLong} end={endLatLong}/>
     </div>
   );
