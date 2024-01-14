@@ -28,3 +28,17 @@ ol {
     margin-bottom: 0;
     border-radius: 25px;
 }
+nav ul {
+    background-color: #b4c4b3;
+    border-radius: 25px;
+    list-style: none; /* Removes bullets */
+    padding: 10px 20px;
+    margin: 0;        /* Removes default margin */
+    text-align: center; /* Centers the text of list items */
+}
+  
+nav li {
+    display: inline;    /* Makes list items display in-line */
+    margin-right: 10px; /* Adds some space between the list items */
+}
+  
