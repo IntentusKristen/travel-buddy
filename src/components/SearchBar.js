@@ -56,7 +56,7 @@ class SearchBar extends React.Component {
                   borderRadius: '1rem',
                   fontSize: '1rem',
                   color: '#000000',
-                  marginTop: 20
+                  marginTop: 10
                 }
               })}
             />
@@ -64,8 +64,8 @@ class SearchBar extends React.Component {
             <div 
               className="autocomplete-dropdown-container"
               style={{
-                paddingLeft: 30,
-                width: '335px',
+                paddingLeft: 36,
+                width: '330px',
               }}
               >
               {loading && <div>Loading...</div>}
