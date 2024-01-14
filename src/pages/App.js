@@ -27,7 +27,7 @@ function App() {
 
   const handleEndLatLong = newLatLong => {
     setEndLatLong(newLatLong);
-    console.log("new LATLONG2" +newLatLong);
+    console.log("new LATLONG2" + newLatLong.lng);
   };
 
   return (

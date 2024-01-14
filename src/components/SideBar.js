@@ -43,9 +43,10 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
       .then(results => { 
         setLatitude(results[0].geometry.location.lat);
         setLongitude(results[0].geometry.location.lng);
-        getLatLng(results[0]);
+        return getLatLng(results[0]);
       })
       .then(latLng => {
+        console.log("latlng called!" + latLng);
         onHandleEndLatLong(latLng);
       })
       .catch(error => console.error('Error', error));

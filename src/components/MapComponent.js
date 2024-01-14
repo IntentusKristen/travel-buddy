@@ -13,7 +13,8 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
   const position = [43.00073, -81.31361];
   const mapRef = useRef();
   const routingMachineRef = useRef();
-
+  const [roads, setRoads] = useState([]);
+  const [tags, setTags] = useState([]);
 
   // update marker position when start or end changes
   useEffect(() => {
@@ -61,7 +62,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
 
    // listen for the routesfound event
    routingMachine.on('routeselected', (event) => {
-   
+    setRoads([]);
     onHandleTags([]);
     // get the route instructions
     const instructions = event.route.instructions;
@@ -69,6 +70,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
 
     // log each instruction to the console
     instructions.forEach(instruction => {
+      setRoads(roads => [...roads, instruction.road]);
       // overpass API query
       const overpassEndpoint = 'https://overpass-api.de/api/interpreter';
       const query = `
