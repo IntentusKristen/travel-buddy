@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import '../UserInfoPage.css';
 
+import { useNavigate } from 'react-router-dom';
 
 const UserInfoPage = () => {
+  const navigate = useNavigate();
+  const goToHomePage = () => { navigate('/'); };
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
