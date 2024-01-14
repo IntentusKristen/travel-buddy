@@ -25,7 +25,7 @@ export const WeatherWidget = ({ address, weather }) => {
           <div className="weather-details">
             <p className="weather-detail">Feels like: {weather.feelslikeC}°</p>
             <p className="weather-detail">Wind: {weather.windSpeedKPH} km/h</p>
-            <p className="weather-detail">Visibility: {weather.visibilityKM.toFixed(2)} km</p>
+            {/* <p className="weather-detail">Visibility: {weather.visibilityKM.toFixed(2)} km</p> */}
           </div>
           <button className="gpt-btn" onClick={() => { setOpenChatbot(true) }}>
             <img src="/icons/sparkle.png" 
