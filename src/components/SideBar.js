@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { WeatherWidget } from '../components/WeatherWidget';
 
+
 export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
   const [startAddress, setStartAddress] = useState('');
   const [endAddress, setEndAddress] = useState('');
