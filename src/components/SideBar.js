@@ -11,6 +11,7 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
   const [weather, setWeather] = useState({});
 
     // Update weather only if end latitude changes
+    // 
     useEffect(() => {
       // fetch('http://localhost:5001/api/weather')
       // .then(res => res.json())
@@ -20,7 +21,7 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong}) => {
       // .catch(error => {
       //     console.error('Error fetching weather data:', error);
       // });
-    }, []);
+    }, [endAddress]);
 
   const handleStartAddress = newAddress => {
     setStartAddress(newAddress);
