@@ -1,6 +1,7 @@
 body {
     background-color: #ebe4d1;
-    margin-left: 20px;
+    margin-left: 70px;
+    
 }
 
 h1 {
@@ -9,7 +10,9 @@ h1 {
 
 p {
     font-size: 20px;
+    word-wrap: break-word;
 }
+
 
 .infoDiv{
     font-size: 20px;
@@ -29,7 +32,7 @@ p {
 }
 
 .lastName{
-    margin-left: 100px;
+    margin-left: 80px;
 }
 
 #pnumber{
@@ -60,4 +63,14 @@ p {
     margin-top: 60px;
     width: 70px;
     height: 30px;
+}
+
+#displayArea{
+    width: 43%;
+    display: inline-block;
+    margin-left: 700px;
+    margin-top: -300px;
+    background-color: #b4c4b3;
+    border-radius: 25px;
+    padding: 30px 20px;
 }
