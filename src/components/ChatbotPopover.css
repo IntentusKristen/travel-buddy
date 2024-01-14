@@ -1,8 +1,8 @@
 .popover {
     display: block;
     position: absolute;
-    top: 20%;
-    left: 50%;
+    top: 10%;
+    left: 100%;
     z-index: 9999;
     height: 500px;
     width: 500px;
@@ -45,9 +45,10 @@
 }
 
 .chat-bubble {
-    text-align: left;
-    font-size: medium;
-    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-start;
+    font-size: x-small;
+    padding: 0 1.5rem;
     border-radius: 25px;
     border: black solid 1px;
     margin-bottom: 1rem;
@@ -57,11 +58,13 @@
 .response {
     background-color: #d1ebd1;
     align-self: flex-start;
+    font-size: medium;
 }
 
 .input {
-    background-color: #468046;
+    background-color: #eaf0ea;
     align-self: flex-end;
+    font-size: medium;
 }
 
 .footer {

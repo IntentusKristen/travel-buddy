@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: #f3f2f2;
     width: 360px;
-    height: 200px;
+    height: 215px;
     color: black;
     border-radius: 25px;
 }
@@ -28,7 +28,7 @@
 
 .current-date {
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 400;
     margin: 0.5rem;
 }

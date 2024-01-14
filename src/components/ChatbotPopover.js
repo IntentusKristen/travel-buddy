@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatbotPopover.css';
 
-const ChatbotPopover = ({ onClose }) => {
+const ChatbotPopover = ({ onClose, weather }) => {
     const [messages, setMessages] = useState([
         { type: "response", text: "I'm Jane, your personal weather assistant. Ask me anything!" },
     ]);
@@ -19,6 +19,34 @@ const ChatbotPopover = ({ onClose }) => {
 
         setInputText("");
     };
+
+    useEffect(() => {
+        if (messages[messages.length - 1].type === "input") {
+            // Convert weather to a string
+            const weatherString = `It is currently ${weather.tempC}°C, it feels like ${weather.feelslikeC}, with windspeed of 
+                                    ${weather.windSpeedKPH} and visibility ${weather.visibilityKM}.`;
+            const userInput = weatherString + messages[messages.length - 1].text;
+
+            fetch('http://localhost:5001/api/openai', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    setMessages((prevMessages) => [
+                        ...prevMessages,
+                        { type: "response", text: data.result.choices[0].message.content },
+                    ]);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+    }, [messages]);
 
     useEffect(() => {
         // Scroll to the bottom of the chat every time there's a new message

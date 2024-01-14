@@ -12,6 +12,8 @@
   "dependencies": {
     "@aerisweather/javascript-sdk": "^1.8.1",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "openai": "^4.24.7",
+    "openai-api": "^1.3.1"
   }
 }
