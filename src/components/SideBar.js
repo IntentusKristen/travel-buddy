@@ -37,24 +37,24 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
       position: "absolute",
       zIndex: 1,
       }}>
-        <div style={{paddingTop:"30px"}}>
+        <div style={{paddingTop:"10px"}}>
+          <h1>Travel Buddy</h1>
         <SearchBar onAddressChange={handleStartAddress} placeholder={"Search Starting Point 🔎"}/>
-        
         <SearchBar onAddressChange={handleEndAddress} placeholder={"Search Destination 🔎"}/>
         </div>
          {/* Showing address selected */}
-        <div style={{paddingTop: 30, marginLeft: 30, marginRight: 30}}>
-          <h4>Routing you from: <br></br>{startAddress} {endAddress}</h4>
+        
+          
           {tags.map(tag => (
-      <div key={tag.name}>
-        <h4>{tag.name}</h4>
-        <p>Type of road: {tag.highway}</p>
-        <p>Lanes: {tag.lanes}</p>
-        <p>Max Speed: {tag.maxspeed? tag.maxspeed: "Unavailable"}</p>
+      <div key={tag.name} style={{ marginBottom: '15px', marginTop: '15px', textAlign: 'left', marginLeft: "50px" }}>
+        <h4 style={{ marginBottom: '0px', marginTop: '2px' }}>{tag.name}: </h4>
+        <p style={{ marginBottom: '0px', marginTop: '2px' }}>Type of road: {tag.highway? tag.highway: "Unavailable"}</p>
+        <p style={{ marginBottom: '0px', marginTop: '2px' }}>Lanes: {tag.lanes? tag.lanes: "Unavailable"}</p>
+        <p style={{ marginBottom: '0px', marginTop: '2px' }}>Max Speed: {tag.maxspeed? tag.maxspeed: "Unavailable"}</p>
       </div>
     ))}
         </div>
   
-      </div>
+  
   )
 }
