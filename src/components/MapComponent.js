@@ -122,15 +122,12 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
   });
   }, [mapRef.current, startLatLong, endLatLong]);
 
-  
-
-
   return (
     <MapContainer
       center={(startLatLong && endLatLong) ? [(startLatLong.lat + endLatLong.lat) / 2, (startLatLong.lng + endLatLong.lng) / 2] : position}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: "1500px", width: "100%", padding: 0, zIndex: 0 }}
+      style={{ height: "100%", width: "100%", padding: 0, zIndex: 0 }}
       className="right-align"
       ref={mapRef}
     >

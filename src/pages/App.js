@@ -1,9 +1,9 @@
 import '../App.css';
 import { MapComponent } from '../components/MapComponent';
 import { SideBar } from '../components/SideBar';
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ChatbotPopover from '../components/ChatbotPopover';
 
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
   const [startLatLong, setStartLatLong] = useState('');
   const [endLatLong, setEndLatLong] = useState('');
   const [tags, setTags] = useState([]);
+  const [openChatbot, setOpenChatbot] = useState(false);
+  const [weather, setWeather] = useState();
 
   const handleTags = newTags => {
     setTags(newTags);
@@ -32,12 +34,26 @@ function App() {
 
   return (
     <div className="App">
-
-      <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} />
-      <MapComponent start={startLatLong} end={endLatLong}/>
-      <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} tags={tags}/>
+      <SideBar 
+        onHandleStartLatLong={handleStartLatLong} 
+        onHandleEndLatLong={handleEndLatLong} 
+        tags={tags} 
+        setOpenChatbot={setOpenChatbot} 
+        setWeather={setWeather} 
+        weather={weather}
+      />
+      <div styles={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+      }}>
+        {openChatbot && weather &&
+        <ChatbotPopover 
+          weather={weather}
+          onClose={() => { setOpenChatbot(false)}}
+          />}
+        </div>
       <MapComponent start={startLatLong} end={endLatLong} onHandleTags={handleTags}/>
-
     </div>
   );
 }

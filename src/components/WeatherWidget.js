@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import ChatbotPopover from "./ChatbotPopover";
+import React from "react";
 import "./WeatherWidget.css";
 
-export const WeatherWidget = ({ address, weather }) => {
-    const [openChatbot, setOpenChatbot] = useState(false);
+export const WeatherWidget = ({ address, weather, setOpenChatbot }) => {
+    
     const date = new Date();
     const shortAddress = address.split(",")[0];
 
@@ -37,11 +36,6 @@ export const WeatherWidget = ({ address, weather }) => {
           </button>
         </div>
       </div>
-      {openChatbot && 
-      <ChatbotPopover 
-        weather={weather}
-        onClose={() => { setOpenChatbot(false)}}
-        />}
       </>
   );
 };

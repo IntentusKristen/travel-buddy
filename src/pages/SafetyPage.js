@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 const SafetyPage = () => {
   return (
     <div className="safetyPageContainer">
-      <h1>TravelBuddy</h1>
-      <p>Hello there! This is TravelBuddy, an application that makes navigating the real world safer!</p> 
+      <h1 style={{
+        marginTop: "2rem",
+      }}>TravelBuddy</h1>
+      <p>TravelBuddy, the application that makes navigating the real world safer.</p> 
       <nav>
         <ul>
           <li>
@@ -21,7 +23,11 @@ const SafetyPage = () => {
         </ul>
       </nav>
       <h2>Safety Tips for Regular Outings</h2>
-        <ol>
+        <ol
+          style={{
+            padding: "2rem 3rem",
+          }}
+        >
           <li>Plan your route
             <ul>
               <li>Know where you are going.</li>
@@ -61,7 +67,11 @@ const SafetyPage = () => {
           </li>
         </ol>
       <h2>Safety Tips for Traveling</h2>
-        <ol>
+        <ol
+          style={{
+            padding: "2rem 3rem"
+          }}
+        >
           <li>Research Your Destination
             <ul>
               <li>Before you travel, research the safety, local laws, customs, and entry requirements of your destination.</li>

@@ -23,11 +23,18 @@ const UserInfoPage = () => {
   
   return (
     <div class = "bigDiv">
-
-    <div>
-      <button onClick={goToHomePage}>Go to Home</button>
+    <div
+      style={{
+        position: 'absolute',
+        top: "10px",
+        right: "10px",
+      }}
+    >
+      <button onClick={goToHomePage} className="gpt-btn">Go to Home</button>
     </div>
-      <div class = "topDiv"> 
+      <div class = "topDiv" style={{
+      marginTop: "3rem",
+    }}> 
       <h1> Personal Information</h1>
       <p> This information will be stored and used for the webapp </p>
       </div>
@@ -35,14 +42,14 @@ const UserInfoPage = () => {
       <div class = "infoDiv">
       <form>
         <label for = "fname" class = "firstName"> First name </label>
-        <input type = "text" name = "fname" id = "fname" value = {firstName} onChange={ (e) => setFirstName(e.target.value)}/> <br></br>
+        <input className="personal-info-input" type = "text" name = "fname" id = "fname" value = {firstName} onChange={ (e) => setFirstName(e.target.value)}/> <br></br>
 
         <label for = "lname" class = "lastName"> Last name </label>
-        <input type = "text" name = "lname" id = "lname" value = {lastName} onChange={ (e) => setLastName(e.target.value)}/> <br></br>
+        <input className="personal-info-input" type = "text" name = "lname" id = "lname" value = {lastName} onChange={ (e) => setLastName(e.target.value)}/> <br></br>
 
         <label for = "pnumber" class = "phoneNumber"> Phone number </label>
-        <input type = "tel" name = "pnumber" id = "pnumber" value = {phoneNumber} onChange={ (e) => setPhoneNumber(e.target.value)}/><br></br>
-        Emergency contact: <input type = "tel" name = "econtact" id = "econtact" value = {emergencyContact} onChange={ (e) => setEmergencyContact(e.target.value)}/>
+        <input className="personal-info-input" type = "tel" name = "pnumber" id = "pnumber" value = {phoneNumber} onChange={ (e) => setPhoneNumber(e.target.value)}/><br></br>
+        Emergency contact <input type = "tel" className="personal-info-input"  name = "econtact" id = "econtact" value = {emergencyContact} onChange={ (e) => setEmergencyContact(e.target.value)}/>
 
         <p> Rank your transportation preference </p>
 
@@ -86,7 +93,7 @@ const UserInfoPage = () => {
         </select>
         <br></br>
   
-        <button type="button" class = "button" onClick={handleSubmit}>Confirm</button>
+        <button type="button" class = "button" onClick={handleSubmit} className="gpt-btn">Confirm</button>
       </form>
         
       </div>

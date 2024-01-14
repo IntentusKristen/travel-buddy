@@ -19,32 +19,16 @@ p {
     line-height: 1.5;
 }
 
-#fname {
-    width: 100px;
-}
-
 .firstName{
     margin-left: 80px;
-}
-
-#lname{
-    width: 100px;
 }
 
 .lastName{
     margin-left: 80px;
 }
 
-#pnumber{
-    width: 100px;
-}
-
 .phoneNumber{
     margin-left: 40px;
-}
-
-#econtact {
-    width: 100px;
 }
 
 .first{
@@ -73,4 +57,19 @@ p {
     background-color: #b4c4b3;
     border-radius: 25px;
     padding: 30px 20px;
+}
+
+.personal-info-input {
+    background: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid 35523C;
+    outline: none;
+    width: 80vw;
+    max-width: 300px;
+    font-size: 1em;
+    transition: padding 0.3s 0.2s ease;
+    margin-left: 1rem;
+    padding: 1rem 1rem 0.2rem 1rem;
 }

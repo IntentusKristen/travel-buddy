@@ -4,10 +4,10 @@ import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { WeatherWidget } from '../components/WeatherWidget';
 
 
-export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
+export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags, setOpenChatbot, setWeather, weather}) => {
   const [startAddress, setStartAddress] = useState('');
   const [endAddress, setEndAddress] = useState('');
-  const [weather, setWeather] = useState();
+  
   // End lat and long
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
@@ -57,17 +57,29 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
     <div style={{backgroundColor: "#ebe4d1",
       top: 0,
       left: 0,
-      height: "1500px",
-      width: "30%",
-      borderRadius: "0% 5% 5% 0%",
+      height: "100%",
+      width: "400px",
       position: "absolute",
       zIndex: 1,
+      overflowY: "scroll",
       }}>
         <div style={{paddingTop:"10px"}}>
-          <h1>Travel Buddy</h1>
+          <a href="/"
+          style={{
+            textDecoration: 'none',
+          }}
+          ><h1>Travel Buddy</h1></a>
         <SearchBar onAddressChange={handleStartAddress} placeholder={"Search Starting Point 🔎"}/>
         <SearchBar onAddressChange={handleEndAddress} placeholder={"Search Destination 🔎"}/>
         </div>
+        {/* Weather widget */}
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop:"1rem"
+            }}>
+            {weather && <WeatherWidget address={endAddress} weather={weather} setOpenChatbot={setOpenChatbot}/>}
+          </div>
          {/* Showing address selected */}  
           {tags &&(tags.map(tag => (
             <div key={tag.name} style={{ marginBottom: '15px', marginTop: '15px' }}>
@@ -77,14 +89,6 @@ export const SideBar = ({onHandleStartLatLong, onHandleEndLatLong, tags}) => {
               <p style={{ marginBottom: '0px', marginTop: '2px' }}>Max Speed: {tag.maxspeed? tag.maxspeed: "Unavailable"}</p>
             </div>
           )))}
-          {/* Weather widget */}
-          <div style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop:"2rem"
-            }}>
-            {weather && <WeatherWidget address={endAddress} weather={weather}/>}
-          </div>
         </div>
   
   
