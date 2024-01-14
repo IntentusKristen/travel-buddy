@@ -4,6 +4,7 @@ import './index.css';
 import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import UserInfoPage from './pages/UserInfoPage';
+import SafetyPage from './pages/SafetyPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

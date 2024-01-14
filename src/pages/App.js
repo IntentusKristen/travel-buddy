@@ -1,23 +1,33 @@
-import logo from '../logo.svg';
 import '../App.css';
+import { MapComponent } from '../components/MapComponent';
+import { SideBar } from '../components/SideBar';
+import React, { useState } from "react";
 
 function App() {
+  // use states for start and end lat and long
+  const [startLatLong, setStartLatLong] = useState('');
+  const [endLatLong, setEndLatLong] = useState('');
+  const [tags, setTags] = useState([]);
+
+  const handleTags = newTags => {
+    setTags(newTags);
+    console.log("new tags" + tags);
+  };
+
+  const handleStartLatLong = newLatLong => {
+    setStartLatLong(newLatLong);
+    console.log("new LATLONG1" + newLatLong.lat);
+  };
+
+  const handleEndLatLong = newLatLong => {
+    setEndLatLong(newLatLong);
+    console.log("new LATLONG2" +newLatLong);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SideBar onHandleStartLatLong={handleStartLatLong} onHandleEndLatLong={handleEndLatLong} tags={tags}/>
+      <MapComponent start={startLatLong} end={endLatLong} onHandleTags={handleTags}/>
     </div>
   );
 }

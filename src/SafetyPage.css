@@ -1,0 +1,27 @@
+.safetyPageContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+h1 {
+    color: #35523c;
+    text-align: center;
+    margin: 0;
+}
+h2 {
+    text-align: center;
+    color: #35523c;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+p {
+    text-align: center;
+    color: #35523c;
+}
+ol {
+    color: #35523c;
+    background-color: #b4c4b3;
+    margin: 10px 0;
+    margin-bottom: 0;
+    border-radius: 25px;
+}
