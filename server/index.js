@@ -18,9 +18,11 @@ const AERIS_CLIENT_SECRET = process.env.AERIS_CLIENT_SECRET;
 const aeris = new AerisWeather(AERIS_CLIENT_ID, AERIS_CLIENT_SECRET);
 
 app.get('/api/weather', (req, res) => {
-    aeris.api().endpoint('observations').place('london, on').get()
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
+    aeris.api().endpoint('observations').place(`${latitude},${longitude}`).get()
       .then((result) => {
-        const data = result.data.ob;
+        const data = result.data;
         res.json({ data });
       })
       .catch((error) => {
