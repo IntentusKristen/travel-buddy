@@ -6,6 +6,8 @@ import "leaflet/dist/leaflet.css";
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useState } from "react";
+import axios from "axios";
+import { parse } from 'node-html-parser';
 
 export const MapComponent = ({ start, end, onHandleTags }) => {
   const [startLatLong, setStartLatLong] = useState('');
@@ -66,7 +68,7 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
     onHandleTags([]);
     // get the route instructions
     const instructions = event.route.instructions;
-    console.log(event.route);
+    //console.log(event);
 
     // log each instruction to the console
     instructions.forEach(instruction => {
@@ -96,7 +98,22 @@ export const MapComponent = ({ start, end, onHandleTags }) => {
             return;
           }
           // save the tags to the state
-          //console.log(data.elements[0].tags);
+          //console.log(data.elements[0].id);
+
+          axios.get(`https://www.openstreetmap.org/way/${data.elements[0].id}`)
+          .then((response) => {
+            const html = response.data;
+            // const root = parse(html);
+            console.log(html);
+
+            // const pageTitle = root.querySelector('fst-italic').text;
+            // console.log('Page Title:', pageTitle);
+
+        
+          })
+          .catch((error) => {
+            console.error('Error fetching the web page:', error);
+          });
           onHandleTags(tags => {
             const newTag = data.elements[0].tags;
           

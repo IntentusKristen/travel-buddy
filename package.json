@@ -12,6 +12,7 @@
     "leaflet": "^1.9.4",
     "leaflet-react": "^3.0.5",
     "leaflet-routing-machine": "^3.2.12",
+    "node-html-parser": "^6.1.12",
     "openai": "^4.24.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
